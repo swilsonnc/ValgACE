@@ -22,6 +22,7 @@ if [ "$IS_MIPS" -eq 1 ]; then
     KLIPPER_HOME="/usr/share/klipper"
     KLIPPER_CONFIG_HOME="/usr/data/printer_data/config"
     MOONRAKER_CONFIG_DIR="/usr/data/printer_data/config"
+    MOONRAKER_HOME="/usr/data/moonraker"
     KLIPPER_ENV="/usr/bin"
 fi
 
@@ -147,7 +148,7 @@ link_moonraker_component() {
     fi
 
     # Ensure destination directory exists
-    DEST_DIR="${MOONRAKER_HOME}/moonraker/components"
+    DEST_DIR="${MOONRAKER_HOME}/moonraker/moonraker/components"
     mkdir -p "${DEST_DIR}"
 
     echo -n "Linking Moonraker component... "
@@ -275,7 +276,7 @@ add_updater() {
 type: git_repo
 path: ${SRCDIR}
 primary_branch: main
-origin: https://github.com/agrloki/ValgACE.git
+origin: https://github.com/swilsonnc/ValgACE.git
 managed_services: klipper
 EOF
 
