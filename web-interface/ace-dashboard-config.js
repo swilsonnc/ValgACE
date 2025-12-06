@@ -5,17 +5,17 @@ const ACE_DASHBOARD_CONFIG = {
     // Адрес Moonraker API
     // По умолчанию используется текущий хост, но можно указать явно
     // Примеры:
-    // apiBase: 'http://localhost:7125',
+    apiBase: 'http://localhost:7125',
     // apiBase: 'http://192.168.1.100:7125',
     // apiBase: 'https://moonraker.example.com',
-    apiBase: window.location.origin,
+    // apiBase: window.location.origin,
     
     // WebSocket адрес
     // По умолчанию определяется автоматически на основе apiBase
     // Примеры:
-    // wsBase: 'ws://localhost:7125',
+    wsBase: 'ws://localhost:7125',
     // wsBase: 'wss://moonraker.example.com',
-    wsBase: null, // null = автоматическое определение
+    // wsBase: null, // null = автоматическое определение
     
     // Интервал автоматического обновления статуса (в миллисекундах)
     // По умолчанию: 5000 (5 секунд)
