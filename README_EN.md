@@ -67,7 +67,7 @@ ValgACE is a full-featured driver for controlling the Anycubic Color Engine Pro 
 
 ```bash
 # Clone repository
-git clone https://github.com/agrloki/ValgACE.git
+git clone https://github.com/swilsonnc/ValgACE.git
 cd ValgACE
 
 # Run installation
@@ -183,7 +183,7 @@ Full command list available in [Commands Reference](docs/en/COMMANDS.md).
 
 ### GitHub
 
-- **Repository:** https://github.com/agrloki/ValgACE
+- **Repository:** https://github.com/swilsonnc/ValgACE
 - **Issues:** Use GitHub Issues for bug reports
 
 ## Acknowledgments
