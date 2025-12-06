@@ -1,280 +1,154 @@
-# ValgACE Dashboard - Веб-интерфейс для управления ACE
+# ValgACE Dashboard - Web Interface for ACE Management
 
-Современный веб-интерфейс для управления и мониторинга устройства Anycubic Color Engine Pro через Moonraker API.
+A modern web interface for managing and monitoring the Anycubic Color Engine Pro via the Moonraker API.
 
-## Описание
+## Description
 
-ValgACE Dashboard - это полнофункциональный веб-интерфейс, который предоставляет:
+ValgACE Dashboard is a fully functional web interface that provides:
 
-- ✅ **Мониторинг статуса** - отображение статуса устройства в реальном времени
-- ✅ **Управление слотами** - загрузка/выгрузка филамента, парковка к хотэнду
-- ✅ **Feed Assist** - включение/выключение feed assist для каждого слота с визуальной индикацией состояния
-- ✅ **Управление сушкой** - запуск и остановка процесса сушки филамента
-- ✅ **Подача/откат филамента** - ручное управление подачей и откатом
-- ✅ **WebSocket подключение** - обновления статуса в реальном времени
-- ✅ **Адаптивный дизайн** - работает на десктопе и мобильных устройствах
-- ✅ **Переключение языка** - встроенный переключатель между Русским и English интерфейсом
+- ✅ **Status Monitoring** - Displays device status in real time
+- ✅ **Slot Management** - Loads/unloads filament, parks it on the hotend
+- ✅ **Feed Assist** - Enables/disables feed assist for each slot with visual status indication
+- ✅ **Drying Control** - Starts and stops filament drying
+- ✅ **Filament Feed/Retract** - Manually controls feed and retract
+- ✅ **WebSocket Connection** - Real-time status updates
+- ✅ **Responsive Design** - Works on desktop and mobile devices
+- ✅ **Language Switching** - Built-in switch between Russian and English interfaces
 
-## Файлы
+## Files
 
-- `ace-dashboard.html` - основной HTML файл с Vue.js компонентом
-- `ace-dashboard.css` - стили интерфейса
-- `ace-dashboard.js` - логика работы с API и WebSocket
-- `ace-dashboard-config.js` - файл конфигурации для настройки адреса Moonraker
-- `nginx.conf.example` - пример конфигурации nginx для хостинга
+- `ace-dashboard.html` - the main HTML file with the Vue.js component
+- `ace-dashboard.css` - interface styles
+- `ace-dashboard.js` - API and WebSocket logic
+- `ace-dashboard-config.js` - configuration file for setting up the Moonraker address
+- `nginx.conf.example` - example nginx configuration for hosting
 
-## Установка
+## Installation
 
-### Вариант 1: Локальный файл (для тестирования)
+### Option 1: Local file (for testing)
 
-1. Скопируйте все файлы в одну папку:
-   ```bash
-   mkdir -p ~/ace-dashboard
-   cp ~/ValgACE/web-interface/ace-dashboard.* ~/ace-dashboard/
-   ```
+1. Copy all files to one folder:
+```bash
+mkdir -p ~/ace-dashboard
+cp ~/ValgACE/web-interface/ace-dashboard.* ~/ace-dashboard/
+```
 
-2. Откройте `ace-dashboard.html` в браузере через веб-сервер (не через `file://`)
+2. Open `ace-dashboard.html` in a browser via the web server (not via `file://`)
 
-   **Важно:** Для работы через `file://` нужно настроить CORS или использовать веб-сервер.
+**Important:** To work via `file://`, you need to configure CORS or use a web server.
 
-### Вариант 2: Интеграция с Mainsail/Fluidd
+### Option 2: Integration with Mainsail/Fluidd
 
-#### Для Mainsail:
+#### For Mainsail:
 
-1. Скопируйте файлы в папку Mainsail:
-   ```bash
-   cp ace-dashboard.html ~/mainsail/src/dashboard/
-   cp ace-dashboard.css ~/mainsail/src/dashboard/
-   cp ace-dashboard.js ~/mainsail/src/dashboard/
-   ```
+1. Copy the files to the Mainsail folder:
+```bash
+cp ace-dashboard.html ~/mainsail/src/dashboard/
+cp ace-dashboard.css ~/mainsail/src/dashboard/
+cp ace-dashboard.js ~/mainsail/src/dashboard/
+```
 
-2. Добавьте ссылку в навигацию Mainsail (требует модификации исходного кода)
+2. Add a link to the Mainsail navigation (requires source code modification)
 
-#### Для Fluidd:
+#### For Fluidd:
 
-1. Скопируйте файлы в папку Fluidd:
-   ```bash
-   cp ace-dashboard.html ~/fluidd/dist/
-   cp ace-dashboard.css ~/fluidd/dist/
-   cp ace-dashboard.js ~/fluidd/dist/
-   ```
+1. Copy the files to the Fluidd folder:
+```bash
+cp ace-dashboard.html ~/fluidd/dist/
+cp ace-dashboard.css ~/fluidd/dist/
+cp ace-dashboard.js ~/fluidd/dist/
+```
 
-2. Добавьте ссылку в навигацию Fluidd
+2. Add a link to the Fluidd navigation
 
-### Вариант 3: Отдельный веб-сервер
+### Option 3: A separate web server
 
-1. Установите простой HTTP сервер:
-   ```bash
-   # Python 3
-   python3 -m http.server 8080
-   
-   # Или Node.js
-   npx http-server -p 8080
-   ```
+1. Install a simple HTTP server:
+```bash
+# Python 3
+python3 -m http.server 8080
 
-2. Откройте в браузере: `http://localhost:8080/ace-dashboard.html`
+# Or Node.js
+npx http-server -p 8080
+```
 
-### Вариант 3: Nginx (рекомендуется для постоянного использования)
+2. Open in a browser: `http://localhost:8080/ace-dashboard.html`
 
-1. Скопируйте файлы в директорию веб-сервера:
-   ```bash
-   sudo cp ace-dashboard.* /var/www/ace-dashboard/
-   ```
+### Option 3: Nginx (recommended for permanent use)
 
-2. Используйте пример конфигурации из `nginx.conf.example`:
-   ```bash
-   sudo cp nginx.conf.example /etc/nginx/sites-available/ace-dashboard
-   sudo nano /etc/nginx/sites-available/ace-dashboard  # Отредактируйте пути
-   sudo ln -s /etc/nginx/sites-available/ace-dashboard /etc/nginx/sites-enabled/
-   sudo nginx -t
-   sudo systemctl reload nginx
-   ```
+1. Copy the files to the web server directory:
+```bash
+sudo cp ace-dashboard.* /var/www/ace-dashboard/
+```
 
-Подробнее см. `nginx.conf.example` с комментариями.
+2. Use the example configuration from `nginx.conf.example`:
+```bash
+sudo cp nginx.conf.example /etc/nginx/sites-available/ace-dashboard
+sudo nano /etc/nginx/sites-available/ace-dashboard # Edit the paths
+sudo ln -s /etc/nginx/sites-available/ace-dashboard /etc/nginx/sites-enabled/
+sudo nginx -t
+sudo systemctl reload nginx
+```
 
-## Использование
+See the commented `nginx.conf.example` for more details.
 
-### Подключение
+## Usage
 
-Интерфейс автоматически подключается к Moonraker API по адресу текущего хоста. Если вы открываете файл локально, убедитесь, что:
+### Connection
 
-1. Moonraker запущен и доступен
-2. Компонент `ace_status.py` установлен и загружен
-3. Браузер может обращаться к Moonraker API (CORS настроен)
+The interface automatically connects to the Moonraker API at the current host address. If you're opening the file locally, make sure:
 
-### Настройка адреса API
+1. Moonraker is running and accessible
+2. The `ace_status.py` component is installed and loaded
+3. The browser can access the Moonraker API (CORS is configured)
 
-Отредактируйте файл `ace-dashboard-config.js`:
+### Configuring the API URL
 
-```javascript
+Edit the `ace-dashboard-config.js` file:
+
+``javascript
 const ACE_DASHBOARD_CONFIG = {
-    // Укажите адрес Moonraker API
-    apiBase: 'http://192.168.1.100:7125',  // Ваш IP адрес Moonraker
-    
-    // Или используйте автоматическое определение (по умолчанию)
-    // apiBase: window.location.origin,
-    
-    // Остальные настройки...
+// Specify the Moonraker API URL
+apiBase: 'http://192.168.1.100:7125', // Your Moonraker IP address
+
+// Or use automatic detection (default)
+// apiBase: window.location.origin,
+
+// Other settings...
 };
 ```
 
-Подробнее см. комментарии в файле `ace-dashboard-config.js`.
+See the comments in the `ace-dashboard-config.js` file for details.
 
-### Основные функции
+### Main Features
 
-#### Мониторинг статуса
+#### Status Monitoring
 
-- Статус устройства отображается в верхней части интерфейса
-- Индикатор подключения показывает состояние WebSocket соединения
-- Автоматическое обновление каждые 5 секунд
+- Device status is displayed at the top of the interface
+- Connection indicator shows the WebSocket connection status
+- Automatically updates every 5 seconds
 
-#### Управление слотами
+#### Slot Management
 
-- **Загрузить** - загружает филамент из слота (выполняет `ACE_CHANGE_TOOL`)
-- **Парковка** - паркует филамент к хотэнду (выполняет `ACE_PARK_TO_TOOLHEAD`)
-- **Асист** - включает/выключает feed assist для слота (`ACE_ENABLE_FEED_ASSIST` / `ACE_DISABLE_FEED_ASSIST`)
-  - Кнопка зеленая с текстом "Асист ВКЛ" когда feed assist активен для этого слота
-  - Кнопка с зеленой обводкой "Асист" когда неактивен
-  - При включении нового слота автоматически выключается предыдущий
-- **Подача** - открывает диалог для подачи филамента на заданную длину
-- **Откат** - открывает диалог для отката филамента на заданную длину
+- **Load** - loads filament from a slot (executes `ACE_CHANGE_TOOL`)
+- **Park** - parks filament to the hotend (executes `ACE_PARK_TO_TOOLHEAD`)
+- **Assist** - enables/disables feed assist for a slot (`ACE_ENABLE_FEED_ASSIST` / `ACE_DISABLE_FEED_ASSIST`)
+- Green button with the text "Assist ON" when feed assist is active for this slot
+- Green button with the text "Assist" when inactive
+- Enabling a new slot automatically disables the previous one
+- **Feed** - opens a dialog for feeding filament to set length
+- **Unroll** - Opens a dialog for unrolling the filament to a set length
 
-#### Управление сушкой
+#### Drying Control
 
-1. Установите целевую температуру (20-55°C)
-2. Установите длительность сушки (в минутах)
-3. Нажмите "Запустить сушку"
-4. Для остановки нажмите "Остановить"
+1. Set the target temperature (20-55°C)
+2. Set the drying duration (in minutes)
+3. Click "Start Drying"
+4. To stop, click "Stop"
 
-#### Быстрые действия
+#### Quick Actions
 
-- **Выгрузить филамент** - выгружает текущий филамент (`ACE_CHANGE_TOOL TOOL=-1`)
-- **Обновить статус** - принудительно обновляет статус устройства
+- **Unload Filament** - Unloads the current filament (`ACE_CHANGE_TOOL TOOL=-1`)
+- **Refresh Status** - Forces a device status update
 
-## API Эндпоинты
-
-Интерфейс использует следующие эндпоинты Moonraker:
-
-- `GET /server/ace/status` - получение статуса устройства
-- `POST /server/ace/command` - выполнение команд ACE
-
-## WebSocket
-
-Интерфейс подключается к WebSocket Moonraker для получения обновлений в реальном времени:
-
-```javascript
-ws://your-moonraker-host:7125/websocket
-```
-
-Подписка на обновления статуса ACE выполняется автоматически при подключении.
-
-## Требования
-
-- Современный браузер с поддержкой ES6 и WebSocket
-- Vue.js 3 (загружается из CDN)
-- Доступ к Moonraker API
-- Установленный компонент `ace_status.py`
-
-## Устранение неполадок
-
-### Интерфейс не подключается к API
-
-1. Проверьте, что Moonraker запущен:
-   ```bash
-   systemctl status moonraker
-   ```
-
-2. Проверьте, что компонент `ace_status.py` загружен:
-   ```bash
-   grep -i "ace_status" ~/printer_data/logs/moonraker.log
-   ```
-
-3. Проверьте доступность API:
-   ```bash
-   curl http://localhost:7125/server/ace/status
-   ```
-
-### WebSocket не подключается
-
-1. Проверьте, что Moonraker доступен по WebSocket:
-   ```bash
-   wscat -c ws://localhost:7125/websocket
-   ```
-
-2. Проверьте настройки CORS в `moonraker.conf`:
-   ```ini
-   [cors_domains]
-   *.local
-   *.lan
-   *:*
-   ```
-
-### Команды не выполняются
-
-1. Проверьте логи Moonraker:
-   ```bash
-   tail -f ~/printer_data/logs/moonraker.log
-   ```
-
-2. Проверьте логи Klipper:
-   ```bash
-   tail -f ~/printer_data/logs/klippy.log | grep -i ace
-   ```
-
-3. Убедитесь, что команды правильно формируются (проверьте консоль браузера)
-
-### Включение отладки
-
-Для диагностики проблем включите отладку в `ace-dashboard-config.js`:
-
-```javascript
-const ACE_DASHBOARD_CONFIG = {
-    // ...
-    debug: true,  // Включить отладочные сообщения
-    // ...
-};
-```
-
-После этого откройте консоль браузера (F12) и проверьте сообщения при загрузке статуса и выполнении команд.
-
-## Кастомизация
-
-### Изменение цветов
-
-Отредактируйте `ace-dashboard.css` для изменения цветовой схемы:
-
-```css
-/* Основной цвет */
-.btn-primary {
-    background: #667eea;  /* Измените на свой цвет */
-}
-```
-
-### Добавление новых функций
-
-Отредактируйте `ace-dashboard.js` для добавления новых команд или функций.
-
-## Безопасность
-
-⚠️ **Важно:** Этот интерфейс выполняет команды напрямую через Moonraker API. Убедитесь, что:
-
-1. Доступ к интерфейсу ограничен локальной сетью
-2. Moonraker настроен с правильными настройками безопасности
-3. Не используйте интерфейс в публичной сети без защиты
-
-## Лицензия
-
-Проект распространяется под лицензией [GNU GPL v3](../../LICENSE.md).
-
-## Поддержка
-
-При возникновении проблем:
-
-1. Проверьте [документацию Moonraker API](../MOONRAKER_API.md)
-2. Проверьте логи Moonraker и Klipper
-3. Создайте issue на GitHub: https://github.com/agrloki/ValgACE/issues
-
----
-
-*Последнее обновление: 2025*
-
+## API Endpoint
