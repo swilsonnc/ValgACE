@@ -5,126 +5,126 @@ const { createApp } = Vue;
 createApp({
     data() {
         return {
-            currentLanguage: 'ru',
+            currentLanguage: 'en',
             translations: {
                 ru: {
                     header: {
                         title: '🎨 ValgACE Control Panel',
-                        connectionLabel: 'Статус',
-                        connected: 'Подключено',
-                        disconnected: 'Отключено'
+                        connectionLabel: 'Status',
+                        connected: 'Connected',
+                        disconnected: 'Disabled'
                     },
                     cards: {
-                        deviceStatus: 'Статус устройства',
-                        dryer: 'Управление сушкой',
-                        slots: 'Слоты филамента',
-                        quickActions: 'Быстрые действия'
+                        deviceStatus: 'Device status',
+                        dryer: 'Drying Control',
+                        slots: 'Filament Slots',
+                        quickActions: 'Quick Actions'
                     },
                     deviceInfo: {
-                        model: 'Модель',
-                        firmware: 'Прошивка',
-                        status: 'Статус',
-                        temp: 'Температура',
-                        fan: 'Вентилятор',
+                        model: 'Model',
+                        firmware: 'Firmware',
+                        status: 'Status',
+                        temp: 'Temperature',
+                        fan: 'Fan',
                         rfid: 'RFID',
-                        rfidOn: 'Включен',
-                        rfidOff: 'Выключен'
+                        rfidOn: 'On',
+                        rfidOff: 'Off'
                     },
                     dryer: {
-                        status: 'Статус',
-                        targetTemp: 'Целевая температура',
-                        duration: 'Заданное время',
-                        remainingTime: 'Осталось времени',
-                        currentTemperature: 'Текущая температура',
+                        status: 'Status',
+                        targetTemp: 'Target temperature',
+                        duration: 'Set time',
+                        remainingTime: 'Time remaining',
+                        currentTemperature: 'Current temperature',
                         inputs: {
-                            temp: 'Температура (°C):',
-                            duration: 'Длительность (мин):'
+                            temp: 'Temperature (°C):',
+                            duration: 'Duration (min):'
                         },
                         buttons: {
-                            start: 'Запустить сушку',
-                            stop: 'Остановить'
+                            start: 'Start drying',
+                            stop: 'Stop'
                         }
                     },
                     slots: {
-                        slot: 'Слот',
-                        status: 'Статус',
-                        type: 'Тип',
+                        slot: 'Slot',
+                        status: 'Status',
+                        type: 'Type',
                         sku: 'SKU',
                         rfid: 'RFID'
                     },
                     quickActions: {
-                        unload: 'Выгрузить филамент',
-                        stopAssist: 'Стоп ассист!',
-                        refresh: 'Обновить статус'
+                        unload: 'Unload filament',
+                        stopAssist: 'Stop assist!',
+                        refresh: 'Update status'
                     },
                     buttons: {
-                        load: 'Загрузить',
-                        park: 'Парковка',
-                        assistOn: 'Асист ВКЛ',
-                        assistOff: 'Асист',
-                        feed: 'Подача',
-                        retract: 'Откат'
+                        load: 'Load',
+                        park: 'Parking',
+                        assistOn: 'Assist ON',
+                        assistOff: 'Assist',
+                        feed: 'Feed',
+                        retract: 'Retract'
                     },
                     dialogs: {
-                        feedTitle: 'Подача филамента - Слот {slot}',
-                        retractTitle: 'Откат филамента - Слот {slot}',
-                        length: 'Длина (мм):',
-                        speed: 'Скорость (мм/с):',
-                        execute: 'Выполнить',
-                        cancel: 'Отмена'
+                        feedTitle: 'Filament Feed - Slot {slot}',
+                        retractTitle: 'Filament Retract - Slot {slot}',
+                        length: 'Length (mm):',
+                        speed: 'Speed ​​(mm/s):',
+                        execute: 'Execute',
+                        cancel: 'Cancel'
                     },
                     notifications: {
-                        websocketConnected: 'WebSocket подключен',
-                        websocketDisconnected: 'WebSocket отключен',
-                        apiError: 'Ошибка API: {error}',
-                        loadError: 'Ошибка загрузки статуса: {error}',
-                        commandSuccess: 'Команда {command} выполнена успешно',
-                        commandSent: 'Команда {command} отправлена',
-                        commandError: 'Ошибка: {error}',
-                        commandErrorGeneric: 'Ошибка выполнения команды',
-                        executeError: 'Ошибка выполнения команды: {error}',
-                        feedAssistOn: 'Feed assist включен для слота {index}',
-                        feedAssistOff: 'Feed assist выключен для слота {index}',
-                        feedAssistAllOff: 'Feed assist выключен для всех слотов',
-                        feedAssistAllOffError: 'Не удалось отключить feed assist',
-                        refreshStatus: 'Статус обновлен',
+                        websocketConnected: 'WebSocket connected',
+                        websocketDisconnected: 'WebSocket disconnected',
+                        apiError: 'API error: {error}',
+                        loadError: 'Error loading status: {error}',
+                        commandSuccess: 'Command {command} completed successfully',
+                        commandSent: 'Command {command} sent',
+                        commandError: 'Error: {error}',
+                        commandErrorGeneric: 'Error executing command',
+                        executeError: 'Error executing command: {error}',
+                        feedAssistOn: 'Feed assist enabled for slot {index}',
+                        feedAssistOff: 'Feed assist disabled for slot {index}',
+                        feedAssistAllOff: 'Feed assist disabled for all slots',
+                        feedAssistAllOffError: 'Failed to disable 'feed assist',
+                        refreshStatus: 'Status updated',
                         validation: {
-                            tempRange: 'Температура должна быть от 20 до 55°C',
-                            durationMin: 'Длительность должна быть минимум 1 минута',
-                            feedLength: 'Длина должна быть минимум 1 мм',
-                            retractLength: 'Длина должна быть минимум 1 мм'
+                            tempRange: 'Temperature must be between 20 and 55°C',
+                            durationMin: 'Duration must be at least 1 minute',
+                            feedLength: 'Length must be at least 1 mm',
+                            retractLength: 'Length must be at least 1 mm'
                         }
                     },
                     statusMap: {
-                        ready: 'Готов',
-                        busy: 'Занят',
-                        unknown: 'Неизвестно',
-                        disconnected: 'Отключено'
+                        ready: 'Ready',
+                        busy: 'Busy',
+                        unknown: 'Unknown',
+                        disconnected: 'Disconnected'
                     },
                     dryerStatusMap: {
-                        drying: 'Сушка',
-                        stop: 'Остановлена'
+                        drying: 'Drying',
+                        stop: 'Stopped'
                     },
                     slotStatusMap: {
-                        ready: 'Готов',
-                        empty: 'Пустой',
-                        busy: 'Занят',
-                        unknown: 'Неизвестно'
+                        ready: 'Ready',
+                        empty: 'Empty',
+                        busy: 'Busy',
+                        unknown: 'Unknown'
                     },
                     rfidStatusMap: {
-                        0: 'Не найдено',
-                        1: 'Ошибка',
-                        2: 'Идентифицировано',
-                        3: 'Идентификация...'
+                        0: 'Not found',
+                        1: 'Error',
+                        2: 'Identified',
+                        3: 'Identifying...'
                     },
                     common: {
-                        unknown: 'Неизвестно'
+                        unknown: 'Unknown'
                     },
                     time: {
-                        hours: 'ч',
-                        minutes: 'мин',
-                        minutesShort: 'м',
-                        secondsShort: 'с'
+                        hours: 'h',
+                        minutes: 'min',
+                        minutes Short: 'm',
+                        seconds Short: 's'
                     }
                 },
                 en: {
@@ -331,7 +331,7 @@ createApp({
         },
 
         toggleLanguage() {
-            this.currentLanguage = this.currentLanguage === 'ru' ? 'en' : 'ru';
+            this.currentLanguage = this.currentLanguage === 'en' ? 'ru' : 'en';
             this.updateDocumentTitle();
         },
 
