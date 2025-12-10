@@ -232,6 +232,7 @@ class ValgAce:
     def _disconnect(self):
         if not self._connected:
             return
+        self._connected = False
         if self._reader_timer:
             self.reactor.unregister_timer(self._reader_timer)
             self._reader_timer = None
