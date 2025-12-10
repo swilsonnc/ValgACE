@@ -17,7 +17,7 @@
                 <h1>{{ t('header.title') }}</h1>
                 <div class="header-actions">
                     <button class="btn btn-language" @click="toggleLanguage">
-                        {{ currentLanguage === 'ru' ? 'EN' : 'RU' }}
+                        {{ currentLanguage === 'en' ? 'RU' : 'EN' }}
                     </button>
                     <div class="connection-status" :class="{ connected: wsConnected, disconnected: !wsConnected }">
                         <span class="status-dot"></span>
