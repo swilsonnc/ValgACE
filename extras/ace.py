@@ -116,6 +116,9 @@ class ValgAce:
     def _get_default_info(self) -> Dict[str, Any]:
         return {
             'status': 'disconnected',
+            'model': 'Unknown',
+            'firmware': 'Unknown',
+            'boot_firmware': 'Unknown',
             'dryer': {
                 'status': 'stop',
                 'target_temp': 0,
@@ -209,10 +212,9 @@ class ValgAce:
 
                     def info_callback(response):
                         res = response['result']
-                        self.logger.info(f"Device info: {res.get('model', 'Unknown')} {res.get('firmware', 'Unknown')}")
-                        self.gcode.respond_info(f"Connected {res.get('model', 'Unknown')} {res.get('firmware', 'Unknown')}")
-
-                    self.send_request({"method": "get_info"}, info_callback)
+                        self.logger.info('Device info: ' + res['model'] + ' ' + res['firmware'])
+                        self.gcode.respond_info('Connected ' + res['model'] + ' ' + res['firmware'])
+                        self.send_request({"method": "get_info"}, info_callback)
 
                     if self._reader_timer is None:
                         self._reader_timer = self.reactor.register_timer(self._reader_loop, self.reactor.NOW)
@@ -230,7 +232,6 @@ class ValgAce:
     def _disconnect(self):
         if not self._connected:
             return
-        self._connected = False
         if self._reader_timer:
             self.reactor.unregister_timer(self._reader_timer)
             self._reader_timer = None
